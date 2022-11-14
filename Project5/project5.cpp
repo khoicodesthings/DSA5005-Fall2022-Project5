@@ -115,6 +115,35 @@ ArrayBTNode<DT>::~ArrayBTNode() {
 	_right = -1;
 }
 
+template <class DT>
+bool ArrayBTNode<DT>:: operator< (const ArrayBTNode<DT>& x) {
+	return ((*_info) < *(x.getinfo()));
+}
+
+template <class DT>
+bool ArrayBTNode<DT>:: operator> (const ArrayBTNode<DT>& x) {
+	return ((*_info) > *(x.getinfo()));
+}
+
+template <class DT>
+bool ArrayBTNode<DT>:: operator== (const ArrayBTNode<DT>& x) {
+	return ((*_info) == *(x.getinfo()));
+}
+
+template <class DT>
+bool ArrayBTNode<DT>:: operator<= (const ArrayBTNode<DT>& x) {
+	return ((*_info) <= *(x.getinfo()));
+}
+
+template <class DT>
+bool ArrayBTNode<DT>:: operator>= (const ArrayBTNode<DT>& x) {
+	return ((*_info) >= *(x.getinfo()));
+}
+
+template <class DT>
+bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
+	return ((*_info) != *(x.getinfo()));
+}
 ////////////////////////////////////////////////////////////////////////////////////////
 // Class ArrayBST
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -157,13 +186,40 @@ public:
 	// BST Specific Methods
 	void insert(DT& object);
 	bool find(DT& object);
+	bool _find(DT& object, int pos);
 	int findIndex(DT& object);
 	void remove(DT& object); // extra credit
 
 	// TODO: Overridden ostream operator for ArrayBST - this will call the pre order and in order methods
 };
 
+template <class DT>
+int ArrayBST<DT>::rootIndex() {
+	return _rootIndex;
+}
 
+template <class DT>
+bool ArrayBST<DT>::find(DT& object) {
+	return _find(object, rootIndex());
+}
+
+template <class DT>
+bool ArrayBST<DT>::_find(DT& object, int pos) {
+	if (*(_tree[pos].getinfo()) == object) return true;
+
+	if (*(_tree[pos].getinfo()) < object) {
+		if (*(_tree[pos]).getright() != -1) {
+			_find(object, _tree[pos].getright());
+		}
+		return false;
+	}
+	else {
+		if (*(_tree[pos]).getleft() != -1) {
+			_find(object, _tree[pos].getleft());
+		}
+		return false;
+	}
+}
 
 
 
