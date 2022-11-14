@@ -53,7 +53,21 @@ public:
 	// TODO: Overloaded Ostream Operator - Uses display method to output ArrayBTNode contents
 };
 
+// Constructors
 
+// Default
+template <class DT>
+ArrayBTNode<DT>::ArrayBTNode() {
+	_info = NULL;
+	_left = -1;
+	_right = -1;
+}
+
+// Non-default
+template <class DT>
+ArrayBTNode<DT>::ArrayBTNode(DT& info) {
+	_info = info;
+}
 
 
 
