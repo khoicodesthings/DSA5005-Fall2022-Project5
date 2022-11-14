@@ -69,6 +69,27 @@ ArrayBTNode<DT>::ArrayBTNode(DT& info) {
 	_info = info;
 }
 
+// Setters
+template <class DT>
+void ArrayBTNode<DT>::setInfo(DT& info) {
+	_info = info;
+}
+
+template <class DT>
+void ArrayBTNode<DT>::setInfoNull() {
+	_info = NULL;
+}
+
+template <class DT>
+void ArrayBTNode<DT>::setLeft(int left) {
+	_left = left;
+}
+
+template <class DT>
+void ArrayBTNode<DT>::setRight(int right) {
+	_right = right;
+}
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
