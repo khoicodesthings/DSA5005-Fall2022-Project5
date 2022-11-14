@@ -107,7 +107,13 @@ void ArrayBTNode<DT>::setRight(int right) {
 	_right = right;
 }
 
-
+// Destructor
+template <class DT>
+ArrayBTNode<DT>::~ArrayBTNode() {
+	_info = NULL;
+	_left = -1;
+	_right = -1;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // Class ArrayBST
