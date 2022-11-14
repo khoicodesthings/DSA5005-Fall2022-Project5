@@ -69,6 +69,23 @@ ArrayBTNode<DT>::ArrayBTNode(DT& info) {
 	_info = info;
 }
 
+// Getters
+
+template <class DT>
+DT* ArrayBTNode<DT>::getinfo() {
+	return _info;
+}
+
+template <class DT>
+int ArrayBTNode<DT>::getleft() {
+	return left;
+}
+
+template <class DT>
+int ArrayBTNode<DT>::getright() {
+	return right;
+}
+
 // Setters
 template <class DT>
 void ArrayBTNode<DT>::setInfo(DT& info) {
