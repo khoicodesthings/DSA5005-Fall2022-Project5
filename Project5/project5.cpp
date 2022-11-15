@@ -67,7 +67,7 @@ ArrayBTNode<DT>::ArrayBTNode() {
 // Non-default
 template <class DT>
 ArrayBTNode<DT>::ArrayBTNode(DT& info) {
-	_info = info;
+	*_info = info;
 }
 
 // Getters
@@ -90,7 +90,7 @@ int ArrayBTNode<DT>::getright() {
 // Setters
 template <class DT>
 void ArrayBTNode<DT>::setInfo(DT& info) {
-	_info = info;
+	*_info = info;
 }
 
 template <class DT>
@@ -348,7 +348,8 @@ int main()
 	// TODO: input loop for commands
 
 	ArrayBTNode<int>* test = new ArrayBTNode<int>();
-
+	//int testint = 10;
+	//test->setInfo(testint);
 	test->display();
 	return 0;
 }
