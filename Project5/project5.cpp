@@ -208,6 +208,29 @@ public:
 	// TODO: Overridden ostream operator for ArrayBST - this will call the pre order and in order methods
 };
 
+// constructors
+
+// default
+template <class DT>
+ArrayBST<DT>::ArrayBST() {
+	_rootIndex = -1;
+	_numNodes = -1;
+	_size = -1;
+	// no need to initialize _tree vector and _freeLocations stack
+}
+
+template <class DT>
+ArrayBST<DT>::ArrayBST(int k) {
+	// initialize the vector with NULL nodes and fill the stack
+	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>(); // this node will have NULL info and -1 for left and right
+	for (int i = 0; i < k; i++) {
+		// push NULL node
+		_tree.push_back(temp);
+		// fill the stack
+		_freeLocations.push(i);
+	}
+}
+
 template <class DT>
 int ArrayBST<DT>::rootIndex() {
 	return _rootIndex;
