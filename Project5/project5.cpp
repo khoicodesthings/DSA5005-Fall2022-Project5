@@ -318,6 +318,12 @@ bool ArrayBST<DT>::_find(DT& object, int pos) {
 	}
 }
 
+template <class DT>
+int ArrayBST<DT>::findIndex(DT& object) {
+
+	return 0;
+}
+
 
 
 
