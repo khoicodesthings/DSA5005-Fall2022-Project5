@@ -248,7 +248,7 @@ int main()
 	// Get input for the size of the tree
 	int inputSize;
 	cin >> inputSize;
-	cout << "Number of maximum nodes: " << inputSize;
+	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
 	//ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 
