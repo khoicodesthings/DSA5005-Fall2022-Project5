@@ -264,6 +264,22 @@ bool ArrayBST<DT>::find(DT& object) {
 	return _find(object, rootIndex());
 }
 
+// mutators
+template <class DT>
+void ArrayBST<DT>::setData(int index, DT& value) {
+	_tree[index].setinfo(value);
+}
+
+template <class DT>
+void ArrayBST<DT>::setLeft(int index, int value) {
+	_tree[index].setleft(value);
+}
+
+template <class DT>
+void ArrayBST<DT>::setRight(int index, int value) {
+	_tree[index].setright(value);
+}
+
 template <class DT>
 bool ArrayBST<DT>::_find(DT& object, int pos) {
 	if (*(_tree[pos].getinfo()) == object) return true;
