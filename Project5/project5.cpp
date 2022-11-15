@@ -279,7 +279,20 @@ void ArrayBST<DT>::setRight(int index, int value) {
 
 template <class DT>
 void ArrayBST<DT>::insert(DT& object) {
-
+	// insert node into _tree vector
+	// pop one free space from stack
+	
+	// make a new node with info being
+	// what's in object
+	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
+	temp->setInfo(object);
+	if (find(object) == true) {
+		cout << "Node already exists" << endl;
+	}
+	else {
+		_tree.push_back(temp);
+		_freeLocations.pop();
+	}
 }
 
 template <class DT>
