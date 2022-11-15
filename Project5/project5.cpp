@@ -231,6 +231,29 @@ ArrayBST<DT>::ArrayBST(int k) {
 	}
 }
 
+// accessors
+
+template <class DT>
+bool ArrayBST<DT>::isEmpty() const {
+	return _tree.empty();
+}
+
+template <class DT>
+int ArrayBST<DT>::Height() {
+	// root to the furthest leaf
+	return _numNodes; // not correct
+}
+
+template <class DT>
+int ArrayBST<DT>::Size() {
+	return _numNodes;
+}
+
+template <class DT>
+int ArrayBST<DT>::maxSize() {
+	return _size;
+}
+
 template <class DT>
 int ArrayBST<DT>::rootIndex() {
 	return _rootIndex;
