@@ -14,6 +14,7 @@ using namespace std;
 template <class DT>
 class ArrayBTNode
 {
+	friend ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node);
 protected:
 	// Instance Variables
 	DT* _info;
@@ -144,6 +145,18 @@ template <class DT>
 bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
 	return ((*_info) != *(x.getinfo()));
 }
+
+ostream& operator<< (ostream& s, const ArrayBTNode<int>& node) {
+	
+	return s;
+}
+
+template <class DT>
+void ArrayBTNode<DT>::display() {
+	cout << *this << endl;
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////
 // Class ArrayBST
 ////////////////////////////////////////////////////////////////////////////////////////
