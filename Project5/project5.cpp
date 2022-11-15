@@ -146,8 +146,9 @@ bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
 	return ((*_info) != *(x.getinfo()));
 }
 
-ostream& operator<< (ostream& s, const ArrayBTNode<int>& node) {
-	
+template <class DT>
+ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node) {
+	s << "Info: " << node.getinfo() << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
 	return s;
 }
 
@@ -251,8 +252,6 @@ int main()
 	//ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 
 	// TODO: input loop for commands
-
-
 
 
 
