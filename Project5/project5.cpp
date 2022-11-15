@@ -79,12 +79,12 @@ DT* ArrayBTNode<DT>::getinfo() {
 
 template <class DT>
 int ArrayBTNode<DT>::getleft() {
-	return left;
+	return _left;
 }
 
 template <class DT>
 int ArrayBTNode<DT>::getright() {
-	return right;
+	return _right;
 }
 
 // Setters
@@ -154,7 +154,8 @@ ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node) {
 
 template <class DT>
 void ArrayBTNode<DT>::display() {
-	cout << *this << endl;
+	cout << "Info: " << getinfo() << ", Left: " << getleft() << ", Right: " << getright() << endl;
+	//cout << *this << endl;
 }
 
 
@@ -247,13 +248,14 @@ int main()
 	// Get input for the size of the tree
 	int inputSize;
 	cin >> inputSize;
-	cout << "input size is: " << inputSize;
+	cout << "Number of maximum nodes: " << inputSize;
 	// Create a BST of the size inputSize
 	//ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 
 	// TODO: input loop for commands
 
+	ArrayBTNode<int>* test = new ArrayBTNode<int>();
 
-
+	test->display();
 	return 0;
 }
