@@ -203,7 +203,7 @@ public:
 	bool find(DT& object);
 	bool _find(DT& object, int pos);
 	int findIndex(DT& object);
-	void remove(DT& object); // extra credit
+	//void remove(DT& object); // extra credit
 
 	// TODO: Overridden ostream operator for ArrayBST - this will call the pre order and in order methods
 };
@@ -259,10 +259,7 @@ int ArrayBST<DT>::rootIndex() {
 	return _rootIndex;
 }
 
-template <class DT>
-bool ArrayBST<DT>::find(DT& object) {
-	return _find(object, rootIndex());
-}
+
 
 // mutators
 template <class DT>
@@ -278,6 +275,16 @@ void ArrayBST<DT>::setLeft(int index, int value) {
 template <class DT>
 void ArrayBST<DT>::setRight(int index, int value) {
 	_tree[index].setright(value);
+}
+
+template <class DT>
+void ArrayBST<DT>::insert(DT& object) {
+
+}
+
+template <class DT>
+bool ArrayBST<DT>::find(DT& object) {
+	return _find(object, rootIndex());
 }
 
 template <class DT>
