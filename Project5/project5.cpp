@@ -320,7 +320,12 @@ bool ArrayBST<DT>::_find(DT& object, int pos) {
 
 template <class DT>
 int ArrayBST<DT>::findIndex(DT& object) {
-
+	if (find(object) == true) {
+		// object in the next line needs to be replaced with an ArrayBTNode node
+		std::vector<int>::iterator it = std::find(_tree.begin(), _tree.end(), object);
+		int index = std::distance(_tree.begin(), it);
+		return index;
+	}
 	return 0;
 }
 
