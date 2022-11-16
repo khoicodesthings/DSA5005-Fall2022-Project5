@@ -222,6 +222,7 @@ ArrayBST<DT>::ArrayBST() {
 template <class DT>
 ArrayBST<DT>::ArrayBST(int k) {
 	// initialize the vector with NULL nodes and fill the stack
+	_tree.reserve(k);
 	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>(); // this node will have NULL info and -1 for left and right
 	for (int i = 0; i < k; i++) {
 		// push NULL node
@@ -286,6 +287,7 @@ void ArrayBST<DT>::insert(DT& object) {
 	// what's in object
 	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
 	temp->setInfo(object);
+	// not sure how to set left and right here
 	if (find(object) == true) {
 		cout << "Node already exists" << endl;
 	}
@@ -329,6 +331,26 @@ int ArrayBST<DT>::findIndex(DT& object) {
 	return 0;
 }
 
+// display methods
+template <class DT>
+void ArrayBST<DT>::display(ostream& os) const {
+
+}
+
+template <class DT>
+void ArrayBST<DT>::displayPreOrder(ostream& os) const {
+
+}
+
+template <class DT>
+void ArrayBST<DT>::displayInOrder(ostream& os) const {
+
+}
+
+template <class DT>
+void ArrayBST<DT>::printRaw() {
+
+}
 
 
 
