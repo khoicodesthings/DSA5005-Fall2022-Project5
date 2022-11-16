@@ -267,17 +267,17 @@ int ArrayBST<DT>::rootIndex() {
 // mutators
 template <class DT>
 void ArrayBST<DT>::setData(int index, DT& value) {
-	_tree[index].setinfo(value);
+	_tree[index].setInfo(value);
 }
 
 template <class DT>
 void ArrayBST<DT>::setLeft(int index, int value) {
-	_tree[index].setleft(value);
+	_tree[index].setLeft(value);
 }
 
 template <class DT>
 void ArrayBST<DT>::setRight(int index, int value) {
-	_tree[index].setright(value);
+	_tree[index].setRight(value);
 }
 
 template <class DT>
@@ -305,35 +305,75 @@ void ArrayBST<DT>::insert(DT& object) {
 	
 	// make a new node with info being
 	// what's in object
-	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
-	temp->setInfo(object);
-	// index to put into tree vector is the top of the stack
-	int index = _freeLocations.top();
-	// not sure how to set left and right here
-	if (find(object) == true) {
-		cout << "Node already exists" << endl;
+	//ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
+	//temp->setInfo(object);
+	//// index to put into tree vector is the top of the stack
+	//int index = _freeLocations.top();
+	//// not sure how to set left and right here
+	//if (find(object) == true) {
+	//	cout << "Node already exists" << endl;
+	//}
+	//else {
+	//	// trying to set left and right index
+	//	for (ArrayBTNode<DT> node : _tree) {
+	//		if (temp > node) {
+	//			// trying to use the find() method
+	//			// of a vector to get the index
+	//			temp->setRight(_tree.find(node));
+	//			break;
+	//		}
+	//		else if (temp < node) {
+	//			temp->setLeft(_tree.find(node));
+	//			break;
+	//		}
+	//		else {
+	//			continue;
+	//		}
+	//	}
+	//	_tree.insert(index, temp);
+	//	// pop the top of the stack out since
+	//	// it's no longer free
+	//	_freeLocations.pop();
+	//	// update index
+	//	index = _freeLocations.top();
+	//}
+	int index = _rootIndex;
+	int parent = -1; // parent of index
+	while (index != -1) {
+		parent = index;
+		if (object < *_tree[index].getinfo()) {
+			index = _tree[index].getleft(); // go left
+		}
+		else {
+			index = _tree[index].getright(); // go right
+		}
+	}
+
+	if (_numNodes <= _size) {
+		if (parent == -1) {
+			_rootIndex = _freeLocations.top();
+			_freeLocations.pop();
+			_tree[_rootIndex].setInfo(object);
+			_numNodes++;
+			cout << endl << "Inserting " << object << endl;
+		}
+		else if (object < *_tree[parent].getinfo()) {
+			_tree[parent].setLeft(_freeLocations.top());
+			_freeLocations.pop();
+			_tree[_tree[parent].getleft()].setInfo(object);
+			_numNodes++;
+			cout << endl << "Inserting " << object << endl;
+		}
+		else {
+			_tree[parent].setRight(_freeLocations.top());
+			_freeLocations.pop();
+			_tree[_tree[parent].getright()].setInfo(object);
+			_numNodes++;
+			cout << endl << "Inserting " << object << endl;
+		}
 	}
 	else {
-		// trying to set left and right index
-		for (ArrayBTNode<DT> node : _tree) {
-			if (temp > node) {
-				temp->setRight(_tree.find(node));
-				break;
-			}
-			else if (temp < node) {
-				temp->setLeft(_tree.find(node));
-				break;
-			}
-			else {
-				continue;
-			}
-		}
-		_tree.insert(index, temp);
-		// pop the top of the stack out since
-		// it's no longer free
-		_freeLocations.pop();
-		// update index
-		index = _freeLocations.top();
+		cout << endl << "Tree is full!" << endl;
 	}
 }
 
@@ -425,7 +465,7 @@ int main()
 	cin >> inputSize;
 	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
-	//ArrayBST<int> myBST = ArrayBST<int>(inputSize);
+	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 
 	// TODO: input loop for commands
 
@@ -433,11 +473,9 @@ int main()
 	int testint = 10;
 	test->setInfo(testint);
 	test->display();
-	/*int value;
-	int* pointer;
-	pointer = &value;
-	*pointer = 80;
-	myBST.insert(*pointer);
-	myBST.printRaw();*/
+
+	int pointer = 80;
+	myBST.insert(pointer);
+	//myBST.printRaw();
 	return 0;
 }
