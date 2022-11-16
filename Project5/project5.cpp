@@ -224,10 +224,10 @@ template <class DT>
 ArrayBST<DT>::ArrayBST(int k) {
 	// initialize the vector with NULL nodes and fill the stack
 	_tree.reserve(k);
-	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>(); // this node will have NULL info and -1 for left and right
+	//ArrayBTNode<DT>* temp = new ArrayBTNode<DT>(); // this node will have NULL info and -1 for left and right
 	for (int i = 0; i < k; i++) {
 		// push NULL node
-		_tree.push_back(temp);
+		//_tree.push_back(temp);
 		// fill the stack
 		_freeLocations.push(i);
 	}
@@ -295,6 +295,20 @@ void ArrayBST<DT>::insert(DT& object) {
 		cout << "Node already exists" << endl;
 	}
 	else {
+		// trying to set left and right index
+		for (ArrayBTNode<DT> node : _tree) {
+			if (temp > node) {
+				temp->setRight(_tree.find(node));
+				break;
+			}
+			else if (temp < node) {
+				temp->setLeft(_tree.find(node));
+				break;
+			}
+			else {
+				continue;
+			}
+		}
 		_tree.insert(index, temp);
 		// pop the top of the stack out since
 		// it's no longer free
@@ -369,7 +383,7 @@ void ArrayBST<DT>::printRaw() {
 	cout << "Free Indexes: " << endl;
 	stack<int> newStack = _freeLocations;
 	while (!newStack.empty()) {
-		cout << newStack.top();
+		cout << newStack.top() << " ";
 		newStack.pop();
 	}
 }
@@ -393,7 +407,7 @@ int main()
 	cin >> inputSize;
 	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
-	//ArrayBST<int> myBST = ArrayBST<int>(inputSize);
+	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 
 	// TODO: input loop for commands
 
@@ -401,5 +415,6 @@ int main()
 	//int testint = 10;
 	//test->setInfo(testint);
 	test->display();
+	myBST.printRaw();
 	return 0;
 }
