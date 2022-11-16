@@ -317,7 +317,23 @@ void ArrayBST<DT>::insert(DT& object) {
 		index = _freeLocations.top();
 	}
 }
-
+//template <class DataType
+//	void BinarySearchTree<DataType>::insert(DataType& data)
+//{
+//	if (_subtree) throw BinarySearchTreeChangedSubtree();
+//	BinarySearchTree<DataType>* bst = _find(data);
+//	if (bst->isEmpty())
+//	{
+//		bst->_info = new DataType(data);
+//		bst->_left = makeSubtree();
+//		bst->_right = makeSubtree();
+//	}
+//	else
+//	{
+//		delete bst->_info;
+//		bst->_info = new DataType(data);
+//	}
+//}
 template <class DT>
 bool ArrayBST<DT>::find(DT& object) {
 	return _find(object, rootIndex());
@@ -415,6 +431,11 @@ int main()
 	//int testint = 10;
 	//test->setInfo(testint);
 	test->display();
+	int value;
+	int* pointer;
+	pointer = &value;
+	*pointer = 80;
+	myBST.insert(*pointer);
 	myBST.printRaw();
 	return 0;
 }
