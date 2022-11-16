@@ -281,6 +281,24 @@ void ArrayBST<DT>::setRight(int index, int value) {
 
 template <class DT>
 void ArrayBST<DT>::insert(DT& object) {
+	//template <class DataType
+	//	void BinarySearchTree<DataType>::insert(DataType& data)
+	//{
+	//	if (_subtree) throw BinarySearchTreeChangedSubtree();
+	//	BinarySearchTree<DataType>* bst = _find(data);
+	//	if (bst->isEmpty())
+	//	{
+	//		bst->_info = new DataType(data);
+	//		bst->_left = makeSubtree();
+	//		bst->_right = makeSubtree();
+	//	}
+	//	else
+	//	{
+	//		delete bst->_info;
+	//		bst->_info = new DataType(data);
+	//	}
+	//}
+
 	// insert node into _tree vector
 	// pop one free space from stack
 	
@@ -317,23 +335,7 @@ void ArrayBST<DT>::insert(DT& object) {
 		index = _freeLocations.top();
 	}
 }
-//template <class DataType
-//	void BinarySearchTree<DataType>::insert(DataType& data)
-//{
-//	if (_subtree) throw BinarySearchTreeChangedSubtree();
-//	BinarySearchTree<DataType>* bst = _find(data);
-//	if (bst->isEmpty())
-//	{
-//		bst->_info = new DataType(data);
-//		bst->_left = makeSubtree();
-//		bst->_right = makeSubtree();
-//	}
-//	else
-//	{
-//		delete bst->_info;
-//		bst->_info = new DataType(data);
-//	}
-//}
+
 template <class DT>
 bool ArrayBST<DT>::find(DT& object) {
 	return _find(object, rootIndex());
@@ -342,16 +344,15 @@ bool ArrayBST<DT>::find(DT& object) {
 template <class DT>
 bool ArrayBST<DT>::_find(DT& object, int pos) {
 	if (*(_tree[pos].getinfo()) == object) return true;
-
 	if (*(_tree[pos].getinfo()) < object) {
-		if (*(_tree[pos]).getright() != -1) {
-			_find(object, _tree[pos].getright());
+		if ((_tree[pos]).getRight() != -1) {
+			return _find(object, _tree[pos].getRight());
 		}
 		return false;
 	}
 	else {
-		if (*(_tree[pos]).getleft() != -1) {
-			_find(object, _tree[pos].getleft());
+		if ((_tree[pos]).getLeft() != -1) {
+			return _find(object, _tree[pos].getLeft());
 		}
 		return false;
 	}
@@ -423,7 +424,7 @@ int main()
 	cin >> inputSize;
 	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
-	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
+	//ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 
 	// TODO: input loop for commands
 
@@ -431,11 +432,11 @@ int main()
 	//int testint = 10;
 	//test->setInfo(testint);
 	test->display();
-	int value;
+	/*int value;
 	int* pointer;
 	pointer = &value;
 	*pointer = 80;
 	myBST.insert(*pointer);
-	myBST.printRaw();
+	myBST.printRaw();*/
 	return 0;
 }
