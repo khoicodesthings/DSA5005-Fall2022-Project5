@@ -223,6 +223,9 @@ ArrayBST<DT>::ArrayBST() {
 
 template <class DT>
 ArrayBST<DT>::ArrayBST(int k) {
+	_rootIndex = -1;
+	_numNodes = 0;
+	_size = k;
 	// initialize the vector with NULL nodes and fill the stack
 	_tree.reserve(k);
 	//ArrayBTNode<DT>* temp = new ArrayBTNode<DT>(); // this node will have NULL info and -1 for left and right
@@ -230,6 +233,7 @@ ArrayBST<DT>::ArrayBST(int k) {
 		// push NULL node
 		//_tree.push_back(temp);
 		// fill the stack
+		_tree[i].setInfoNull();
 		_freeLocations.push(i);
 	}
 }
@@ -465,7 +469,7 @@ int main()
 	cin >> inputSize;
 	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
-	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
+	
 
 	// TODO: input loop for commands
 
@@ -473,7 +477,7 @@ int main()
 	int testint = 10;
 	test->setInfo(testint);
 	test->display();
-
+	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 	int pointer = 80;
 	myBST.insert(pointer);
 	//myBST.printRaw();
