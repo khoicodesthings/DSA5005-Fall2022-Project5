@@ -166,6 +166,7 @@ void ArrayBTNode<DT>::display() {
 template <class DT>
 class ArrayBST
 {
+	friend ostream& operator<< (ostream& s, const ArrayBST<DT>& tree);
 protected:
 	// Instance Variables
 	vector<ArrayBTNode<DT> > _tree;    // Vector of ArrayBTNodes used to create a tree
@@ -299,7 +300,7 @@ void ArrayBST<DT>::insert(DT& object) {
 		// it's no longer free
 		_freeLocations.pop();
 		// update index
-		index = freeLocations.top();
+		index = _freeLocations.top();
 	}
 }
 
@@ -338,6 +339,12 @@ int ArrayBST<DT>::findIndex(DT& object) {
 }
 
 // display methods
+
+template <class DT>
+ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
+	return s;
+}
+
 template <class DT>
 void ArrayBST<DT>::display(ostream& os) const {
 
@@ -356,7 +363,7 @@ void ArrayBST<DT>::displayInOrder(ostream& os) const {
 template <class DT>
 void ArrayBST<DT>::printRaw() {
 	cout << "Raw Data: " << endl;
-	for (ArrayBTNode<DT> i in : _tree) {
+	for (ArrayBTNode<DT> i : _tree) {
 		i.display();
 	}
 	cout << "Free Indexes: " << endl;
@@ -367,6 +374,12 @@ void ArrayBST<DT>::printRaw() {
 	}
 }
 
+template <class DT>
+ArrayBST<DT>::~ArrayBST() {
+	_rootIndex = -1;
+	_numNodes = -1;
+	_size = -1;
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
