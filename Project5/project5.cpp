@@ -287,13 +287,19 @@ void ArrayBST<DT>::insert(DT& object) {
 	// what's in object
 	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
 	temp->setInfo(object);
+	// index to put into tree vector is the top of the stack
+	int index = _freeLocations.top();
 	// not sure how to set left and right here
 	if (find(object) == true) {
 		cout << "Node already exists" << endl;
 	}
 	else {
-		_tree.push_back(temp);
+		_tree.insert(index, temp);
+		// pop the top of the stack out since
+		// it's no longer free
 		_freeLocations.pop();
+		// update index
+		index = freeLocations.top();
 	}
 }
 
@@ -349,7 +355,16 @@ void ArrayBST<DT>::displayInOrder(ostream& os) const {
 
 template <class DT>
 void ArrayBST<DT>::printRaw() {
-
+	cout << "Raw Data: " << endl;
+	for (ArrayBTNode<DT> i in : _tree) {
+		i.display();
+	}
+	cout << "Free Indexes: " << endl;
+	stack<int> newStack = _freeLocations;
+	while (!newStack.empty()) {
+		cout << newStack.top();
+		newStack.pop();
+	}
 }
 
 
