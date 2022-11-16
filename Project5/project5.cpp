@@ -67,7 +67,7 @@ ArrayBTNode<DT>::ArrayBTNode() {
 // Non-default
 template <class DT>
 ArrayBTNode<DT>::ArrayBTNode(DT& info) {
-	*_info = info;
+	_info = new DT(info);
 }
 
 // Getters
@@ -90,7 +90,8 @@ int ArrayBTNode<DT>::getright() {
 // Setters
 template <class DT>
 void ArrayBTNode<DT>::setInfo(DT& info) {
-	*_info = info;
+	//*_info = info;
+	_info = new DT(info);
 }
 
 template <class DT>
@@ -148,13 +149,13 @@ bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
 
 template <class DT>
 ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node) {
-	s << "Info: " << node.getinfo() << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
+	s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
 	return s;
 }
 
 template <class DT>
 void ArrayBTNode<DT>::display() {
-	cout << "Info: " << getinfo() << ", Left: " << getleft() << ", Right: " << getright() << endl;
+	cout << "Info: " << *_info << ", Left: " << getleft() << ", Right: " << getright() << endl;
 	//cout << *this << endl;
 }
 
@@ -429,8 +430,8 @@ int main()
 	// TODO: input loop for commands
 
 	ArrayBTNode<int>* test = new ArrayBTNode<int>();
-	//int testint = 10;
-	//test->setInfo(testint);
+	int testint = 10;
+	test->setInfo(testint);
 	test->display();
 	/*int value;
 	int* pointer;
