@@ -68,6 +68,8 @@ ArrayBTNode<DT>::ArrayBTNode() {
 template <class DT>
 ArrayBTNode<DT>::ArrayBTNode(DT& info) {
 	_info = new DT(info);
+	_left = -1;
+	_right = -1;
 }
 
 // Getters
@@ -91,6 +93,7 @@ int ArrayBTNode<DT>::getright() {
 template <class DT>
 void ArrayBTNode<DT>::setInfo(DT& info) {
 	//*_info = info;
+	delete _info;
 	_info = new DT(info);
 }
 
@@ -312,6 +315,9 @@ void ArrayBST<DT>::insert(DT& object) {
 	// int parent = -1; // parent of index, only for the first insertion
 	// make a new node with info being
 	// what's in object
+	/*if (find(object) == true) {
+		cout << "Node already exists" << endl;
+	}*/
 	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
 	temp->setInfo(object);
 	
@@ -351,14 +357,14 @@ template <class DT>
 bool ArrayBST<DT>::_find(DT& object, int pos) {
 	if (*(_tree[pos].getinfo()) == object) return true;
 	if (*(_tree[pos].getinfo()) < object) {
-		if ((_tree[pos]).getRight() != -1) {
-			return _find(object, _tree[pos].getRight());
+		if ((_tree[pos]).getright() != -1) {
+			return _find(object, _tree[pos].getright());
 		}
 		return false;
 	}
 	else {
-		if ((_tree[pos]).getLeft() != -1) {
-			return _find(object, _tree[pos].getLeft());
+		if ((_tree[pos]).getleft() != -1) {
+			return _find(object, _tree[pos].getleft());
 		}
 		return false;
 	}
