@@ -216,8 +216,8 @@ public:
 template <class DT>
 ArrayBST<DT>::ArrayBST() {
 	_rootIndex = -1;
-	_numNodes = -1;
-	_size = -1;
+	_numNodes = 0;
+	_size = 0;
 	// no need to initialize _tree vector and _freeLocations stack
 }
 
@@ -233,7 +233,7 @@ ArrayBST<DT>::ArrayBST(int k) {
 		// push NULL node
 		//_tree.push_back(temp);
 		// fill the stack
-		_tree[i].setInfoNull();
+		//_tree[i].setInfoNull();
 		_freeLocations.push(i);
 	}
 }
@@ -473,13 +473,50 @@ int main()
 
 	// TODO: input loop for commands
 
-	ArrayBTNode<int>* test = new ArrayBTNode<int>();
+	/*ArrayBTNode<int>* test = new ArrayBTNode<int>();
 	int testint = 10;
 	test->setInfo(testint);
 	test->display();
 	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 	int pointer = 80;
 	myBST.insert(pointer);
-	//myBST.printRaw();
+	myBST.printRaw();*/
+
+	char command;
+	cin >> command;
+
+	while (!cin.eof()) {
+		switch (command) {
+			case 'I': {
+				int value;
+				cin >> value;
+				cout << "Inserting " << value << endl;
+				// myBST.insert(value);
+				break;
+			}
+			case 'O': {
+				cout << "Information in Tree:" << endl;
+				cout << "Pre Order Traversal" << endl;
+				//myBST.displayPreOrder
+				cout << "In Order Traversal" << endl;
+				//myBST.displayInOrder
+				break;
+			}
+			case 'A': {
+				cout << "Raw Data:" << endl;
+				//myBST.printRaw();
+				break;
+			}
+			case 'F': {
+				int value;
+				cin >> value;
+				cout << "Finding " << value << endl;
+				//myBST.findIndex(value);
+				break;
+			}
+			default: cout << "It broke :(" << endl;
+		}
+		cin >> command;
+	}
 	return 0;
 }
