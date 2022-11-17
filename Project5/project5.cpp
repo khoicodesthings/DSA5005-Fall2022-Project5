@@ -361,7 +361,7 @@ void ArrayBST<DT>::insert(DT& object) {
 			//_tree[_tree[parent].getleft()].setInfo(object);
 			_tree.push_back(*temp);
 			_numNodes++;
-			cout << endl << "Inserting " << object << endl;
+			// cout << endl << "Inserting " << object << endl;
 		}
 		else {
 			temp->setRight(_freeLocations.top());
@@ -435,14 +435,21 @@ void ArrayBST<DT>::displayInOrder(ostream& os) const {
 template <class DT>
 void ArrayBST<DT>::printRaw() {
 	cout << "Raw Data: " << endl;
-	for (ArrayBTNode<DT> i : _tree) {
-		i.display();
+	for (int j = 0; j < _numNodes; j++) {
+		cout << "Index " << j << ": ";
+		/*for (ArrayBTNode<DT> i : _tree) {
+			i.display();
+		}*/
+		_tree[j].display();
 	}
 	cout << "Free Indexes: " << endl;
 	stack<int> newStack = _freeLocations;
 	while (!newStack.empty()) {
 		cout << newStack.top() << " ";
 		newStack.pop();
+	}
+	if (_freeLocations.empty() == true) {
+		cout << "None";
 	}
 }
 
@@ -503,7 +510,7 @@ int main()
 				break;
 			}
 			case 'A': {
-				cout << "Raw Data:" << endl;
+				// cout << "Raw Data:" << endl;
 				myBST.printRaw();
 				cout << endl;
 				break;
