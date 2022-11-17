@@ -345,17 +345,8 @@ void ArrayBST<DT>::insert(DT& object) {
 	int parent = -1; // parent of index
 	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
 	temp->setInfo(object);
-	while (index != -1) {
-		parent = index;
-		if (object < *_tree[index].getinfo()) {
-			index = _tree[index].getleft(); // go left
-		}
-		else {
-			index = _tree[index].getright(); // go right
-		}
-	}
-
-	if (_numNodes <= _size) {
+	
+	if (_numNodes < _size) {
 		if (parent == -1) {
 			_rootIndex = _freeLocations.top();
 			_freeLocations.pop();
@@ -382,7 +373,7 @@ void ArrayBST<DT>::insert(DT& object) {
 		}
 	}
 	else {
-		cout << endl << "Cannot insert data, BST Full." << endl;
+		cout << "Cannot insert data, BST Full." << endl;
 	}
 }
 
@@ -486,46 +477,47 @@ int main()
 	myBST.insert(pointer);
 	myBST.printRaw();*/
 	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
-	int value = 7;
+	/*int value = 7;
 	myBST.insert(value);
 	int value2 = 17;
 	myBST.insert(value2);
-	myBST.printRaw();
-	//char command;
-	//cin >> command;
+	myBST.printRaw();*/
+	char command;
+	cin >> command;
 
-	//while (!cin.eof()) {
-	//	switch (command) {
-	//		case 'I': {
-	//			int value;
-	//			cin >> value;
-	//			cout << "Inserting " << value << endl;
-	//			myBST.insert(value);
-	//			break;
-	//		}
-	//		case 'O': {
-	//			cout << "Information in Tree:" << endl;
-	//			cout << "Pre Order Traversal" << endl;
-	//			//myBST.displayPreOrder
-	//			cout << "In Order Traversal" << endl;
-	//			//myBST.displayInOrder
-	//			break;
-	//		}
-	//		case 'A': {
-	//			cout << "Raw Data:" << endl;
-	//			//myBST.printRaw();
-	//			break;
-	//		}
-	//		case 'F': {
-	//			int value;
-	//			cin >> value;
-	//			cout << "Finding " << value << endl;
-	//			//myBST.findIndex(value);
-	//			break;
-	//		}
-	//		default: cout << "It broke :(" << endl;
-	//	}
-	//	cin >> command;
-	//}
+	while (!cin.eof()) {
+		switch (command) {
+			case 'I': {
+				int value;
+				cin >> value;
+				cout << "Inserting " << value << endl;
+				myBST.insert(value);
+				break;
+			}
+			case 'O': {
+				cout << "Information in Tree:" << endl;
+				cout << "Pre Order Traversal" << endl;
+				//myBST.displayPreOrder
+				cout << "In Order Traversal" << endl;
+				//myBST.displayInOrder
+				break;
+			}
+			case 'A': {
+				cout << "Raw Data:" << endl;
+				myBST.printRaw();
+				cout << endl;
+				break;
+			}
+			case 'F': {
+				int value;
+				cin >> value;
+				cout << "Finding " << value << endl;
+				//myBST.findIndex(value);
+				break;
+			}
+			default: cout << "It broke :(" << endl;
+		}
+		cin >> command;
+	}
 	return 0;
 }
