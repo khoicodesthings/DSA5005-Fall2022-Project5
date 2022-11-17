@@ -44,12 +44,12 @@ public:
 
 	// Overloaded Comparison Operators
 	// Used for comparing _info field with other ArrayBTNodes
-	bool operator<(const ArrayBTNode<DT>& x);
-	bool operator>(const ArrayBTNode<DT>& x);
-	bool operator==(const ArrayBTNode<DT>& x);
-	bool operator>=(const ArrayBTNode<DT>& x);
-	bool operator<=(const ArrayBTNode<DT>& x);
-	bool operator!=(const ArrayBTNode<DT>& x);
+	bool operator<( ArrayBTNode<DT>& x);
+	bool operator>( ArrayBTNode<DT>& x);
+	bool operator==( ArrayBTNode<DT>& x);
+	bool operator>=( ArrayBTNode<DT>& x);
+	bool operator<=( ArrayBTNode<DT>& x);
+	bool operator!=( ArrayBTNode<DT>& x);
 
 	// TODO: Overloaded Ostream Operator - Uses display method to output ArrayBTNode contents
 };
@@ -121,32 +121,32 @@ ArrayBTNode<DT>::~ArrayBTNode() {
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator< (const ArrayBTNode<DT>& x) {
+bool ArrayBTNode<DT>:: operator< ( ArrayBTNode<DT>& x) {
 	return *_info < *x.getinfo();
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator> (const ArrayBTNode<DT>& x) {
-	return *_info > x.getinfo();
+bool ArrayBTNode<DT>:: operator> ( ArrayBTNode<DT>& x) {
+	return *_info > *x.getinfo();
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator== (const ArrayBTNode<DT>& x) {
+bool ArrayBTNode<DT>:: operator== ( ArrayBTNode<DT>& x) {
 	return *_info == *x.getinfo();
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator<= (const ArrayBTNode<DT>& x) {
+bool ArrayBTNode<DT>:: operator<= ( ArrayBTNode<DT>& x) {
 	return *_info <= *x.getinfo();
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator>= (const ArrayBTNode<DT>& x) {
+bool ArrayBTNode<DT>:: operator>= ( ArrayBTNode<DT>& x) {
 	return *_info >= *x.getinfo();
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
+bool ArrayBTNode<DT>:: operator!= ( ArrayBTNode<DT>& x) {
 	return *_info != *x.getinfo();
 }
 
@@ -231,12 +231,8 @@ ArrayBST<DT>::ArrayBST(int k) {
 	_size = k;
 	// initialize the vector with NULL nodes and fill the stack
 	_tree.reserve(k);
-	//ArrayBTNode<DT>* temp = new ArrayBTNode<DT>(); // this node will have NULL info and -1 for left and right
 	for (int i = 0; i < k; i++) {
 		// push NULL node
-		//_tree.push_back(temp);
-		// fill the stack
-		//_tree[i].setInfoNull();
 		_freeLocations.push(i);
 		_tree.push_back(ArrayBTNode<DT>());
 	}
@@ -419,12 +415,15 @@ void ArrayBST<DT>::displayInOrder(ostream& os) const {
 template <class DT>
 void ArrayBST<DT>::printRaw() {
 	cout << "Raw Data: " << endl;
-	for (int j = 0; j < _numNodes; j++) {
-		cout << "Index " << j << ": ";
-		/*for (ArrayBTNode<DT> i : _tree) {
-			i.display();
-		}*/
-		_tree[j].display();
+	//for (int j = _numNodes; j == 0; j--) {
+	//	cout << "Index " << j << ": ";
+	//	/*for (ArrayBTNode<DT> i : _tree) {
+	//		i.display();
+	//	}*/
+	//	_tree[j].display();
+	//}
+	for (ArrayBTNode<DT> i : _tree) {
+		i.display();
 	}
 	cout << "Free Indexes: " << endl;
 	stack<int> newStack = _freeLocations;
