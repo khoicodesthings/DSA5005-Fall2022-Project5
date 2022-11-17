@@ -226,7 +226,7 @@ ArrayBST<DT>::ArrayBST() {
 
 template <class DT>
 ArrayBST<DT>::ArrayBST(int k) {
-	_rootIndex = -1;
+	_rootIndex = k - 1;
 	_numNodes = 0;
 	_size = k;
 	// initialize the vector with NULL nodes and fill the stack
@@ -238,6 +238,7 @@ ArrayBST<DT>::ArrayBST(int k) {
 		// fill the stack
 		//_tree[i].setInfoNull();
 		_freeLocations.push(i);
+		_tree.push_back(ArrayBTNode<DT>());
 	}
 }
 
@@ -455,6 +456,7 @@ int main()
 	myBST.insert(pointer);
 	myBST.printRaw();*/
 	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
+	//myBST.printRaw();
 	/*int value = 7;
 	myBST.insert(value);
 	int value2 = 17;
@@ -497,6 +499,6 @@ int main()
 		}
 		cin >> command;
 	}
-	cout << "Root index is: " << myBST.rootIndex();
+	//cout << "Root index is: " << myBST.rootIndex();
 	return 0;
 }
