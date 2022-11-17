@@ -307,72 +307,36 @@ void ArrayBST<DT>::insert(DT& object) {
 	// insert node into _tree vector
 	// pop one free space from stack
 	
+
+	
+	// int parent = -1; // parent of index, only for the first insertion
 	// make a new node with info being
 	// what's in object
-	//ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
-	//temp->setInfo(object);
-	//// index to put into tree vector is the top of the stack
-	//int index = _freeLocations.top();
-	//// not sure how to set left and right here
-	//if (find(object) == true) {
-	//	cout << "Node already exists" << endl;
-	//}
-	//else {
-	//	// trying to set left and right index
-	//	for (ArrayBTNode<DT> node : _tree) {
-	//		if (temp > node) {
-	//			// trying to use the find() method
-	//			// of a vector to get the index
-	//			temp->setRight(_tree.find(node));
-	//			break;
-	//		}
-	//		else if (temp < node) {
-	//			temp->setLeft(_tree.find(node));
-	//			break;
-	//		}
-	//		else {
-	//			continue;
-	//		}
-	//	}
-	//	_tree.insert(index, temp);
-	//	// pop the top of the stack out since
-	//	// it's no longer free
-	//	_freeLocations.pop();
-	//	// update index
-	//	index = _freeLocations.top();
-	//}
-	int index = _rootIndex;
-	int parent = -1; // parent of index
 	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
 	temp->setInfo(object);
 	
-	if (_numNodes < _size) {
-		if (parent == -1) {
+	while (_numNodes < _size) {
+		if (_rootIndex == -1) { // first insertion will always be the root
 			_rootIndex = _freeLocations.top();
+			cout << "Root index is: " << _rootIndex << endl;
 			_freeLocations.pop();
-			//_tree[_rootIndex].setInfo(object);
 			_tree.push_back(*temp);
 			_numNodes++;
-			//cout << endl << "Inserting " << object << endl;
 		}
-		else if (object < *_tree[parent].getinfo()) {
+		else if (object < *_tree[parent].getinfo()) { // go left
 			temp->setLeft(_freeLocations.top());
 			_freeLocations.pop();
-			//_tree[_tree[parent].getleft()].setInfo(object);
 			_tree.push_back(*temp);
 			_numNodes++;
-			// cout << endl << "Inserting " << object << endl;
 		}
-		else {
+		else { // go right
 			temp->setRight(_freeLocations.top());
 			_freeLocations.pop();
-			//_tree[_tree[parent].getright()].setInfo(object);
 			_tree.push_back(*temp);
 			_numNodes++;
-			//cout << endl << "Inserting " << object << endl;
 		}
 	}
-	else {
+	else { // full tree
 		cout << "Cannot insert data, BST Full." << endl;
 	}
 }
@@ -526,5 +490,6 @@ int main()
 		}
 		cin >> command;
 	}
+	cout << "Root index is: " << myBST.rootIndex();
 	return 0;
 }
