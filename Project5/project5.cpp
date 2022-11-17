@@ -343,6 +343,8 @@ void ArrayBST<DT>::insert(DT& object) {
 	//}
 	int index = _rootIndex;
 	int parent = -1; // parent of index
+	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
+	temp->setInfo(object);
 	while (index != -1) {
 		parent = index;
 		if (object < *_tree[index].getinfo()) {
@@ -357,27 +359,30 @@ void ArrayBST<DT>::insert(DT& object) {
 		if (parent == -1) {
 			_rootIndex = _freeLocations.top();
 			_freeLocations.pop();
-			_tree[_rootIndex].setInfo(object);
+			//_tree[_rootIndex].setInfo(object);
+			_tree.push_back(*temp);
 			_numNodes++;
-			cout << endl << "Inserting " << object << endl;
+			//cout << endl << "Inserting " << object << endl;
 		}
 		else if (object < *_tree[parent].getinfo()) {
-			_tree[parent].setLeft(_freeLocations.top());
+			temp->setLeft(_freeLocations.top());
 			_freeLocations.pop();
-			_tree[_tree[parent].getleft()].setInfo(object);
+			//_tree[_tree[parent].getleft()].setInfo(object);
+			_tree.push_back(*temp);
 			_numNodes++;
 			cout << endl << "Inserting " << object << endl;
 		}
 		else {
-			_tree[parent].setRight(_freeLocations.top());
+			temp->setRight(_freeLocations.top());
 			_freeLocations.pop();
-			_tree[_tree[parent].getright()].setInfo(object);
+			//_tree[_tree[parent].getright()].setInfo(object);
+			_tree.push_back(*temp);
 			_numNodes++;
-			cout << endl << "Inserting " << object << endl;
+			//cout << endl << "Inserting " << object << endl;
 		}
 	}
 	else {
-		cout << endl << "Tree is full!" << endl;
+		cout << endl << "Cannot insert data, BST Full." << endl;
 	}
 }
 
@@ -477,11 +482,10 @@ int main()
 	int testint = 10;
 	test->setInfo(testint);
 	test->display();
-	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 	int pointer = 80;
 	myBST.insert(pointer);
 	myBST.printRaw();*/
-
+	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 	char command;
 	cin >> command;
 
@@ -491,7 +495,7 @@ int main()
 				int value;
 				cin >> value;
 				cout << "Inserting " << value << endl;
-				// myBST.insert(value);
+				myBST.insert(value);
 				break;
 			}
 			case 'O': {
