@@ -486,41 +486,46 @@ int main()
 	myBST.insert(pointer);
 	myBST.printRaw();*/
 	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
-	char command;
-	cin >> command;
+	int value = 7;
+	myBST.insert(value);
+	int value2 = 17;
+	myBST.insert(value2);
+	myBST.printRaw();
+	//char command;
+	//cin >> command;
 
-	while (!cin.eof()) {
-		switch (command) {
-			case 'I': {
-				int value;
-				cin >> value;
-				cout << "Inserting " << value << endl;
-				myBST.insert(value);
-				break;
-			}
-			case 'O': {
-				cout << "Information in Tree:" << endl;
-				cout << "Pre Order Traversal" << endl;
-				//myBST.displayPreOrder
-				cout << "In Order Traversal" << endl;
-				//myBST.displayInOrder
-				break;
-			}
-			case 'A': {
-				cout << "Raw Data:" << endl;
-				//myBST.printRaw();
-				break;
-			}
-			case 'F': {
-				int value;
-				cin >> value;
-				cout << "Finding " << value << endl;
-				//myBST.findIndex(value);
-				break;
-			}
-			default: cout << "It broke :(" << endl;
-		}
-		cin >> command;
-	}
+	//while (!cin.eof()) {
+	//	switch (command) {
+	//		case 'I': {
+	//			int value;
+	//			cin >> value;
+	//			cout << "Inserting " << value << endl;
+	//			myBST.insert(value);
+	//			break;
+	//		}
+	//		case 'O': {
+	//			cout << "Information in Tree:" << endl;
+	//			cout << "Pre Order Traversal" << endl;
+	//			//myBST.displayPreOrder
+	//			cout << "In Order Traversal" << endl;
+	//			//myBST.displayInOrder
+	//			break;
+	//		}
+	//		case 'A': {
+	//			cout << "Raw Data:" << endl;
+	//			//myBST.printRaw();
+	//			break;
+	//		}
+	//		case 'F': {
+	//			int value;
+	//			cin >> value;
+	//			cout << "Finding " << value << endl;
+	//			//myBST.findIndex(value);
+	//			break;
+	//		}
+	//		default: cout << "It broke :(" << endl;
+	//	}
+	//	cin >> command;
+	//}
 	return 0;
 }
