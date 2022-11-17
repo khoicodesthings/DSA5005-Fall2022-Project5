@@ -323,27 +323,6 @@ void ArrayBST<DT>::insert(DT& object) {
 	// temp->setInfo(object);
 	int index = 0;
 	if (_numNodes < _size) {
-		//if (_rootIndex == -1) { // first insertion will always be the root
-		//	_rootIndex = _freeLocations.top();
-		//	cout << "Root index is: " << _rootIndex << endl;
-		//	_freeLocations.pop();
-		//	_tree.push_back(*temp);
-		//	_numNodes++;
-		//}
-		//// not sure what to do here
-		//else if (object < *_tree[_rootIndex].getinfo()) { // go left
-		//	index = _freeLocations.top();
-		//	temp->setLeft(_freeLocations.top());
-		//	_freeLocations.pop();
-		//	_tree.push_back(*temp);
-		//	_numNodes++;
-		//}
-		//else { // go right
-		//	temp->setRight(_freeLocations.top());
-		//	_freeLocations.pop();
-		//	_tree.push_back(*temp);
-		//	_numNodes++;
-		//}
 		// Get a location to insert a new node
 		int freeIndex = _freeLocations.top();
 		_freeLocations.pop();
@@ -355,7 +334,7 @@ void ArrayBST<DT>::insert(DT& object) {
 		if (freeIndex != _rootIndex) { // only traverse the tree if there are more than 1 node, otherwise, it is the first insertion
 			// traverse the tree
 			while (true) {
-				if (_tree[currIndex] > _tree[freeIndex]) { // go right
+				if (_tree[currIndex] > _tree[freeIndex]) { // go left
 					if (_tree[currIndex].getleft() == -1) {
 						_tree[currIndex].setLeft(freeIndex);
 						break;
@@ -365,7 +344,7 @@ void ArrayBST<DT>::insert(DT& object) {
 						currIndex = _tree[currIndex].getleft();
 					}
 				}
-				else { // go left
+				else { // go right
 					if (_tree[currIndex].getright() == -1) {
 						_tree[currIndex].setRight(freeIndex);
 						break;
@@ -424,7 +403,7 @@ ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
 
 template <class DT>
 void ArrayBST<DT>::display(ostream& os) const {
-
+	// will call displayPreOrder and displayInOrder
 }
 
 template <class DT>
