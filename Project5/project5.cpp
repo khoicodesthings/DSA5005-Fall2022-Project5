@@ -122,32 +122,32 @@ ArrayBTNode<DT>::~ArrayBTNode() {
 
 template <class DT>
 bool ArrayBTNode<DT>:: operator< (const ArrayBTNode<DT>& x) {
-	return ((*_info) < *(x.getinfo()));
+	return *_info < *x.getinfo();
 }
 
 template <class DT>
 bool ArrayBTNode<DT>:: operator> (const ArrayBTNode<DT>& x) {
-	return ((*_info) > *(x.getinfo()));
+	return *_info > x.getinfo();
 }
 
 template <class DT>
 bool ArrayBTNode<DT>:: operator== (const ArrayBTNode<DT>& x) {
-	return ((*_info) == *(x.getinfo()));
+	return *_info == *x.getinfo();
 }
 
 template <class DT>
 bool ArrayBTNode<DT>:: operator<= (const ArrayBTNode<DT>& x) {
-	return ((*_info) <= *(x.getinfo()));
+	return *_info <= *x.getinfo();
 }
 
 template <class DT>
 bool ArrayBTNode<DT>:: operator>= (const ArrayBTNode<DT>& x) {
-	return ((*_info) >= *(x.getinfo()));
+	return *_info >= *x.getinfo();
 }
 
 template <class DT>
 bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
-	return ((*_info) != *(x.getinfo()));
+	return *_info != *x.getinfo();
 }
 
 template <class DT>
@@ -319,29 +319,62 @@ void ArrayBST<DT>::insert(DT& object) {
 	/*if (find(object) == true) {
 		cout << "Node already exists" << endl;
 	}*/
-	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
-	temp->setInfo(object);
-	
+	// ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
+	// temp->setInfo(object);
+	int index = 0;
 	if (_numNodes < _size) {
-		if (_rootIndex == -1) { // first insertion will always be the root
-			_rootIndex = _freeLocations.top();
-			cout << "Root index is: " << _rootIndex << endl;
-			_freeLocations.pop();
-			_tree.push_back(*temp);
-			_numNodes++;
-		}
-		// not sure what to do here
-		else if (object < *_tree[_rootIndex].getinfo()) { // go left
-			temp->setLeft(_freeLocations.top());
-			_freeLocations.pop();
-			_tree.push_back(*temp);
-			_numNodes++;
-		}
-		else { // go right
-			temp->setRight(_freeLocations.top());
-			_freeLocations.pop();
-			_tree.push_back(*temp);
-			_numNodes++;
+		//if (_rootIndex == -1) { // first insertion will always be the root
+		//	_rootIndex = _freeLocations.top();
+		//	cout << "Root index is: " << _rootIndex << endl;
+		//	_freeLocations.pop();
+		//	_tree.push_back(*temp);
+		//	_numNodes++;
+		//}
+		//// not sure what to do here
+		//else if (object < *_tree[_rootIndex].getinfo()) { // go left
+		//	index = _freeLocations.top();
+		//	temp->setLeft(_freeLocations.top());
+		//	_freeLocations.pop();
+		//	_tree.push_back(*temp);
+		//	_numNodes++;
+		//}
+		//else { // go right
+		//	temp->setRight(_freeLocations.top());
+		//	_freeLocations.pop();
+		//	_tree.push_back(*temp);
+		//	_numNodes++;
+		//}
+		// Get a location to insert a new node
+		int freeIndex = _freeLocations.top();
+		_freeLocations.pop();
+		// Increment the number of nodes
+		_numNodes++;
+		_tree[freeIndex].setInfo(object);
+		// Start traversing the tree (in this case, the vector)
+		int currIndex = _rootIndex;
+		if (freeIndex != _rootIndex) { // only traverse the tree if there are more than 1 node, otherwise, it is the first insertion
+			// traverse the tree
+			while (true) {
+				if (_tree[currIndex] > _tree[freeIndex]) { // go right
+					if (_tree[currIndex].getleft() == -1) {
+						_tree[currIndex].setLeft(freeIndex);
+						break;
+					}
+					else { // this means there is already a node here
+						// update the current index to that index
+						currIndex = _tree[currIndex].getleft();
+					}
+				}
+				else { // go left
+					if (_tree[currIndex].getright() == -1) {
+						_tree[currIndex].setRight(freeIndex);
+						break;
+					}
+					else {
+						currIndex = _tree[currIndex].getright();
+					}
+				}
+			}
 		}
 	}
 	else { // full tree
