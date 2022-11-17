@@ -315,7 +315,7 @@ void ArrayBST<DT>::insert(DT& object) {
 	ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
 	temp->setInfo(object);
 	
-	while (_numNodes < _size) {
+	if (_numNodes < _size) {
 		if (_rootIndex == -1) { // first insertion will always be the root
 			_rootIndex = _freeLocations.top();
 			cout << "Root index is: " << _rootIndex << endl;
@@ -323,7 +323,8 @@ void ArrayBST<DT>::insert(DT& object) {
 			_tree.push_back(*temp);
 			_numNodes++;
 		}
-		else if (object < *_tree[parent].getinfo()) { // go left
+		// not sure what to do here
+		else if (object < *_tree[_rootIndex].getinfo()) { // go left
 			temp->setLeft(_freeLocations.top());
 			_freeLocations.pop();
 			_tree.push_back(*temp);
