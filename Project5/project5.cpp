@@ -115,9 +115,9 @@ void ArrayBTNode<DT>::setRight(int right) {
 // Destructor
 template <class DT>
 ArrayBTNode<DT>::~ArrayBTNode() {
-	delete _info;
+	/*delete _info;
 	_left = -1;
-	_right = -1;
+	_right = -1;*/
 }
 
 template <class DT>
@@ -158,7 +158,7 @@ ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node) {
 
 template <class DT>
 void ArrayBTNode<DT>::display() {
-	cout << "Info: " << *_info << ", Left: " << getleft() << ", Right: " << getright() << endl;
+	cout << "Info: " << getinfo() << ", Left: " << getleft() << ", Right: " << getright() << endl;
 	//cout << *this << endl;
 }
 
@@ -286,38 +286,6 @@ void ArrayBST<DT>::setRight(int index, int value) {
 
 template <class DT>
 void ArrayBST<DT>::insert(DT& object) {
-	//template <class DataType
-	//	void BinarySearchTree<DataType>::insert(DataType& data)
-	//{
-	//	if (_subtree) throw BinarySearchTreeChangedSubtree();
-	//	BinarySearchTree<DataType>* bst = _find(data);
-	//	if (bst->isEmpty())
-	//	{
-	//		bst->_info = new DataType(data);
-	//		bst->_left = makeSubtree();
-	//		bst->_right = makeSubtree();
-	//	}
-	//	else
-	//	{
-	//		delete bst->_info;
-	//		bst->_info = new DataType(data);
-	//	}
-	//}
-
-	// insert node into _tree vector
-	// pop one free space from stack
-	
-
-	
-	// int parent = -1; // parent of index, only for the first insertion
-	// make a new node with info being
-	// what's in object
-	/*if (find(object) == true) {
-		cout << "Node already exists" << endl;
-	}*/
-	// ArrayBTNode<DT>* temp = new ArrayBTNode<DT>();
-	// temp->setInfo(object);
-	int index = 0;
 	if (_numNodes < _size) {
 		// Get a location to insert a new node
 		int freeIndex = _freeLocations.top();
@@ -423,7 +391,9 @@ void ArrayBST<DT>::printRaw() {
 	//	_tree[j].display();
 	//}
 	for (ArrayBTNode<DT> i : _tree) {
-		i.display();
+		if (i.getinfo() != NULL) {
+			i.display();
+		}
 	}
 	cout << "Free Indexes: " << endl;
 	stack<int> newStack = _freeLocations;
