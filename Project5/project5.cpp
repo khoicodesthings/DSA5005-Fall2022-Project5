@@ -99,6 +99,7 @@ void ArrayBTNode<DT>::setInfo(DT& info) {
 
 template <class DT>
 void ArrayBTNode<DT>::setInfoNull() {
+	delete _info;
 	_info = NULL;
 }
 
@@ -115,9 +116,9 @@ void ArrayBTNode<DT>::setRight(int right) {
 // Destructor
 template <class DT>
 ArrayBTNode<DT>::~ArrayBTNode() {
-	/*delete _info;
+	//delete _info;
 	_left = -1;
-	_right = -1;*/
+	_right = -1;
 }
 
 template <class DT>
