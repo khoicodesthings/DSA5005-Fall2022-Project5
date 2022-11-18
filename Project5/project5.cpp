@@ -349,13 +349,14 @@ bool ArrayBST<DT>::_find(DT& object, int pos) {
 
 template <class DT>
 int ArrayBST<DT>::findIndex(DT& object) {
-	if (find(object) == true) {
-		// object in the next line needs to be replaced with an ArrayBTNode node
-		std::vector<int>::iterator it = std::find(_tree.begin(), _tree.end(), object);
-		int index = std::distance(_tree.begin(), it);
-		return index;
+	int index = 0;
+	for (int i = 0; i < _numNodes; i++) {
+		if (find(object) == true) {
+			index = i;
+			break;
+		}
 	}
-	return 0;
+	return index;
 }
 
 // display methods
@@ -425,24 +426,9 @@ int main()
 	cin >> inputSize;
 	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
-	
+	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
 
 	// TODO: input loop for commands
-
-	/*ArrayBTNode<int>* test = new ArrayBTNode<int>();
-	int testint = 10;
-	test->setInfo(testint);
-	test->display();
-	int pointer = 80;
-	myBST.insert(pointer);
-	myBST.printRaw();*/
-	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
-	//myBST.printRaw();
-	/*int value = 7;
-	myBST.insert(value);
-	int value2 = 17;
-	myBST.insert(value2);
-	myBST.printRaw();*/
 	char command;
 	cin >> command;
 
@@ -473,7 +459,8 @@ int main()
 				int value;
 				cin >> value;
 				cout << "Finding " << value << endl;
-				//myBST.findIndex(value);
+				int findThis = myBST.findIndex(value);
+				cout << "Found at index: " << findThis << endl;
 				break;
 			}
 			default: cout << "It broke :(" << endl;
