@@ -476,6 +476,12 @@ int main()
 				cout << "Finding " << value << endl;
 				//int findThis = myBST.findIndex(value);
 				//cout << "Found at index: " << findThis << endl;
+				if (myBST.find(value) == true) {
+					cout << "Number found at index " << myBST.findIndex(value) << "." << endl;
+				}
+				else {
+					cout << "Number not found." << endl;
+				}
 				break;
 			}
 			default: cout << "It broke :(" << endl;
