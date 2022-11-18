@@ -152,13 +152,14 @@ bool ArrayBTNode<DT>:: operator!= ( ArrayBTNode<DT>& x) {
 
 template <class DT>
 ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node) {
-	s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
+	//s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
+	node.display();
 	return s;
 }
 
 template <class DT>
 void ArrayBTNode<DT>::display() {
-	cout << "Info: " << getinfo() << ", Left: " << getleft() << ", Right: " << getright() << endl;
+	cout << "Info: " << *getinfo() << ", Left: " << getleft() << ", Right: " << getright() << endl;
 	//cout << *this << endl;
 }
 
@@ -351,7 +352,7 @@ template <class DT>
 int ArrayBST<DT>::findIndex(DT& object) {
 	int index = 0;
 	for (int i = 0; i < _numNodes; i++) {
-		if (find(object) == true) {
+		if (*_tree[i].getinfo() != NULL && object == *_tree[i].getinfo()) {
 			index = i;
 			break;
 		}
@@ -363,6 +364,8 @@ int ArrayBST<DT>::findIndex(DT& object) {
 
 template <class DT>
 ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
+	// will call display here
+	// in main, simply use cout << myBST
 	return s;
 }
 
@@ -373,12 +376,13 @@ void ArrayBST<DT>::display(ostream& os) const {
 
 template <class DT>
 void ArrayBST<DT>::displayPreOrder(ostream& os) const {
-
+	// root, left tree, right tree
+	
 }
 
 template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) const {
-
+	// left tree, root, right tree
 }
 
 template <class DT>
@@ -394,8 +398,19 @@ void ArrayBST<DT>::printRaw() {
 	for (ArrayBTNode<DT> i : _tree) {
 		if (i.getinfo() != NULL) {
 			i.display();
+			//cout << i;
 		}
 	}
+	/*for (int i = 0; i < _numNodes; i++) {
+		if (_tree[i].getinfo() == NULL) {
+			cout << "Index " << i << ": ";
+			_tree[i].display();
+		}
+		if (_tree[i].getinfo() != NULL) {
+			cout << "Index " << i << ": ";
+			_tree[i].display();
+		}
+	}*/
 	cout << "Free Indexes: " << endl;
 	stack<int> newStack = _freeLocations;
 	while (!newStack.empty()) {
@@ -459,8 +474,8 @@ int main()
 				int value;
 				cin >> value;
 				cout << "Finding " << value << endl;
-				int findThis = myBST.findIndex(value);
-				cout << "Found at index: " << findThis << endl;
+				//int findThis = myBST.findIndex(value);
+				//cout << "Found at index: " << findThis << endl;
 				break;
 			}
 			default: cout << "It broke :(" << endl;
