@@ -352,7 +352,7 @@ template <class DT>
 int ArrayBST<DT>::findIndex(DT& object) {
 	int index = 0;
 	for (int i = 0; i < _numNodes; i++) {
-		if (*_tree[i].getinfo() != NULL && object == *_tree[i].getinfo()) {
+		if (find(object) == true) {
 			index = i;
 			break;
 		}
@@ -465,7 +465,6 @@ int main()
 				break;
 			}
 			case 'A': {
-				// cout << "Raw Data:" << endl;
 				myBST.printRaw();
 				cout << endl;
 				break;
@@ -474,8 +473,6 @@ int main()
 				int value;
 				cin >> value;
 				cout << "Finding " << value << endl;
-				//int findThis = myBST.findIndex(value);
-				//cout << "Found at index: " << findThis << endl;
 				if (myBST.find(value) == true) {
 					cout << "Number found at index " << myBST.findIndex(value) << "." << endl;
 				}
@@ -488,6 +485,5 @@ int main()
 		}
 		cin >> command;
 	}
-	//cout << "Root index is: " << myBST.rootIndex();
 	return 0;
 }
