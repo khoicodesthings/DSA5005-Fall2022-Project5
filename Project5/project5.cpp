@@ -351,13 +351,27 @@ bool ArrayBST<DT>::_find(DT& object, int pos) {
 
 template <class DT>
 int ArrayBST<DT>::findIndex(DT& object) {
-	int index = 0;
+	/*int index = 0;
 	for (int i = 0; i < _numNodes; i++) {
 		if (find(object) == true) {
 			index = i;
 			break;
 		}
 	}
+	return index;*/
+	int index = _rootIndex;
+	while (index != -1) {
+		if (*_tree[index].getinfo() == object) {
+			return index;
+		}
+		if (*_tree[index].getinfo() < object) {
+			index = _tree[index].getright();
+		}
+		else {
+			index = _tree[index].getleft();
+		}
+	}
+
 	return index;
 }
 
