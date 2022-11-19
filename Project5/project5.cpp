@@ -351,17 +351,11 @@ bool ArrayBST<DT>::_find(DT& object, int pos) {
 
 template <class DT>
 int ArrayBST<DT>::findIndex(DT& object) {
-	/*int index = 0;
-	for (int i = 0; i < _numNodes; i++) {
-		if (find(object) == true) {
-			index = i;
-			break;
-		}
-	}
-	return index;*/
 	int index = _rootIndex;
-	while (index != -1) {
+	bool found = false;
+	while (found == false) {
 		if (*_tree[index].getinfo() == object) {
+			found = true;
 			return index;
 		}
 		if (*_tree[index].getinfo() < object) {
@@ -403,29 +397,19 @@ void ArrayBST<DT>::displayInOrder(ostream& os) const {
 template <class DT>
 void ArrayBST<DT>::printRaw() {
 	cout << "Raw Data: " << endl;
-	//for (int j = _numNodes; j == 0; j--) {
-	//	cout << "Index " << j << ": ";
-	//	/*for (ArrayBTNode<DT> i : _tree) {
-	//		i.display();
-	//	}*/
-	//	_tree[j].display();
-	//}
-	for (ArrayBTNode<DT> i : _tree) {
+	/*for (ArrayBTNode<DT> i : _tree) {
 		if (i.getinfo() != NULL) {
 			i.display();
 			//cout << i;
 		}
-	}
-	/*for (int i = 0; i < _numNodes; i++) {
-		if (_tree[i].getinfo() == NULL) {
-			cout << "Index " << i << ": ";
-			_tree[i].display();
-		}
-		if (_tree[i].getinfo() != NULL) {
-			cout << "Index " << i << ": ";
-			_tree[i].display();
-		}
 	}*/
+	for (int i = 0; i < _numNodes; i++) {
+		if (_tree[i].getinfo() != NULL) {
+			// cout << "Index " << this->find(*_tree[i].getinfo()) << ": ";
+			cout << "Index " << i << ": ";
+			_tree[i].display();
+		}
+	}
 	cout << "Free Indexes: " << endl;
 	stack<int> newStack = _freeLocations;
 	while (!newStack.empty()) {
