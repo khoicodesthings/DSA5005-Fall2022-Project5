@@ -423,7 +423,7 @@ void ArrayBST<DT>::printRaw() {
 			//cout << i;
 		}
 	}*/
-	for (int i = 0; i < _numNodes; i++) {
+	for (int i = 0; i < _size; i++) {
 		if (_tree[i].getinfo() != NULL) {
 			// cout << "Index " << this->find(*_tree[i].getinfo()) << ": ";
 			cout << "Index " << i << ": ";
@@ -477,7 +477,7 @@ int main()
 			}
 			case 'O': {
 				cout << "Information in Tree:" << endl;
-				cout << myBST << endl;
+				// cout << myBST << endl;
 				break;
 			}
 			case 'A': {
