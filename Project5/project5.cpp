@@ -417,15 +417,8 @@ void ArrayBST<DT>::displayInOrder(ostream& os) const {
 template <class DT>
 void ArrayBST<DT>::printRaw() {
 	cout << "Raw Data: " << endl;
-	/*for (ArrayBTNode<DT> i : _tree) {
-		if (i.getinfo() != NULL) {
-			i.display();
-			//cout << i;
-		}
-	}*/
 	for (int i = 0; i < _size; i++) {
 		if (_tree[i].getinfo() != NULL) {
-			// cout << "Index " << this->find(*_tree[i].getinfo()) << ": ";
 			cout << "Index " << i << ": ";
 			_tree[i].display();
 		}
