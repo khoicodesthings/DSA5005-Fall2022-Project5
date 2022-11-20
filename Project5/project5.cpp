@@ -375,23 +375,43 @@ template <class DT>
 ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
 	// will call display here
 	// in main, simply use cout << myBST
+	tree.display();
 	return s;
 }
 
 template <class DT>
 void ArrayBST<DT>::display(ostream& os) const {
 	// will call displayPreOrder and displayInOrder
+	displayPreOrder();
+	displayInOrder();
 }
 
 template <class DT>
 void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 	// root, left tree, right tree
+	os << "Pre Order Traversal" << endl;
+	if (isEmpty()) return;
+	os << rootIndex() << " ";
+	for (size_t i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
+		_tree[i].getleft().displayPreOrder(os);
+		_tree[i].getright().displayPreOrder(os);
+	}
 	
 }
 
 template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) const {
 	// left tree, root, right tree
+	os << "In Order Traversal" << endl;
+	if (isEmpty()) return;
+	for (int i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
+		_tree[i].getleft().displayPreOrder(os);
+		_tree[i].getright().displayPreOrder(os);
+	}
+	os << rootIndex() << " ";
+	for (int i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
+		_tree[i].getright().displayPreOrder(os);
+	}
 }
 
 template <class DT>
@@ -457,10 +477,7 @@ int main()
 			}
 			case 'O': {
 				cout << "Information in Tree:" << endl;
-				cout << "Pre Order Traversal" << endl;
-				//myBST.displayPreOrder
-				cout << "In Order Traversal" << endl;
-				//myBST.displayInOrder
+				cout << myBST << endl;
 				break;
 			}
 			case 'A': {
