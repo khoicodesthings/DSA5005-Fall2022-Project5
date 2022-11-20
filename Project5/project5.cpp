@@ -356,9 +356,8 @@ int ArrayBST<DT>::findIndex(DT& object) {
 	while (found == false) {
 		if (*_tree[index].getinfo() == object) {
 			found = true;
-			return index;
 		}
-		if (*_tree[index].getinfo() < object) {
+		else if (*_tree[index].getinfo() < object) {
 			index = _tree[index].getright();
 		}
 		else {
