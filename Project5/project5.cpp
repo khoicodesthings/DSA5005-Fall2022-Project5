@@ -389,12 +389,26 @@ template <class DT>
 void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 	// root, left tree, right tree
 	os << "Pre Order Traversal" << endl;
+	int index = _rootIndex;
 	if (isEmpty()) return;
-	os << rootIndex() << " ";
-	for (size_t i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
+	os << _tree[index].getinfo() << " ";
+	while (true) {
+		if (*_tree[index].getinfo() == *_tree[index + 1].getinfo()) {
+			break;
+		}
+		else if (*_tree[index].getinfo() < *_tree[index + 1].getinfo()) {
+			index = _tree[index].getright();
+			displayPreOrder(os);
+		}
+		else {
+			index = _tree[index].getleft();
+			displayPreOrder(os);
+		}
+	}
+	/*for (size_t i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
 		_tree[i].getleft().displayPreOrder(os);
 		_tree[i].getright().displayPreOrder(os);
-	}
+	}*/
 	
 }
 
@@ -402,14 +416,30 @@ template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) const {
 	// left tree, root, right tree
 	os << "In Order Traversal" << endl;
-	if (isEmpty()) return;
+	/*if (isEmpty()) return;
 	for (int i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
 		_tree[i].getleft().displayPreOrder(os);
 		_tree[i].getright().displayPreOrder(os);
 	}
-	os << rootIndex() << " ";
+	os << _tree[rootIndex()].getinfo() << " ";
 	for (int i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
 		_tree[i].getright().displayPreOrder(os);
+	}*/
+	int index = _rootIndex;
+	if (isEmpty()) return;
+	while (true) {
+		if (*_tree[index].getinfo() == *_tree[index + 1].getinfo()) {
+			os << _tree[index].getinfo() << " ";
+			break;
+		}
+		else if (*_tree[index].getinfo() < *_tree[index + 1].getinfo()) {
+			index = _tree[index].getright();
+			displayPreOrder(os);
+		}
+		else {
+			index = _tree[index].getleft();
+			displayPreOrder(os);
+		}
 	}
 }
 
