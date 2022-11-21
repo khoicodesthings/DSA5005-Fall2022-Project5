@@ -14,7 +14,12 @@ int displayIndex;
 template <class DT>
 class ArrayBTNode
 {
-	friend ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node);
+	template <class DT>
+	friend ostream& operator<< (ostream& s, ArrayBTNode<DT>& node) {
+		//s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
+		node.display();
+		return s;
+	}
 protected:
 	// Instance Variables
 	DT* _info;
@@ -151,12 +156,7 @@ bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
 	return *_info != *x._info;
 }
 
-template <class DT>
-ostream& operator<< (ostream& s, const ArrayBTNode<DT>& node) {
-	//s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
-	node.display();
-	return s;
-}
+
 
 template <class DT>
 void ArrayBTNode<DT>::display() {
@@ -173,7 +173,7 @@ template <class DT>
 class ArrayBST
 {
 	template <class DT>
-	friend ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
+	friend ostream& operator<< (ostream& s, ArrayBST<DT>& tree) {
 		// will call display here
 		// in main, simply use cout << myBST
 		tree.display(s);
@@ -433,7 +433,8 @@ void ArrayBST<DT>::printRaw() {
 	for (int i = 0; i < _size; i++) {
 		if (_tree[i].getinfo() != NULL) {
 			cout << "Index " << i << ": ";
-			_tree[i].display();
+			// _tree[i].display();
+			cout << _tree[i];
 		}
 	}
 	cout << "Free Indexes: " << endl;
