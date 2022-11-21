@@ -391,19 +391,18 @@ template <class DT>
 void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 	// root, left tree, right tree
 	
-	int index = _rootIndex;
 	if (isEmpty()) return;
-	os << *_tree[index].getinfo() << " ";
+	os << *_tree[displayIndex].getinfo() << " ";
 	while (true) {
-		if (*_tree[index].getinfo() == *_tree[index + 1].getinfo()) {
+		if (*_tree[displayIndex].getinfo() == *_tree[displayIndex + 1].getinfo()) {
 			break;
 		}
-		else if (*_tree[index].getinfo() < *_tree[index + 1].getinfo()) {
-			index = _tree[index].getright();
+		else if (*_tree[displayIndex].getinfo() < *_tree[displayIndex + 1].getinfo()) {
+			displayIndex = _tree[displayIndex].getright();
 			displayPreOrder(os);
 		}
 		else {
-			index = _tree[index].getleft();
+			displayIndex = _tree[displayIndex].getleft();
 			displayPreOrder(os);
 		}
 	}
@@ -412,20 +411,18 @@ void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) const {
 	// left tree, root, right tree
-	os << "In Order Traversal" << endl;
-	int index = _rootIndex;
 	if (isEmpty()) return;
 	while (true) {
-		if (*_tree[index].getinfo() == *_tree[index + 1].getinfo()) {
-			os << *_tree[index].getinfo() << " ";
+		if (*_tree[displayIndex].getinfo() == *_tree[displayIndex + 1].getinfo()) {
+			os << *_tree[displayIndex].getinfo() << " ";
 			break;
 		}
-		else if (*_tree[index].getinfo() < *_tree[index + 1].getinfo()) {
-			index = _tree[index].getright();
+		else if (*_tree[displayIndex].getinfo() < *_tree[displayIndex + 1].getinfo()) {
+			displayIndex = _tree[displayIndex].getright();
 			displayPreOrder(os);
 		}
 		else {
-			index = _tree[index].getleft();
+			displayIndex = _tree[displayIndex].getleft();
 			displayPreOrder(os);
 		}
 	}
@@ -487,7 +484,7 @@ int main()
 			}
 			case 'O': {
 				cout << "Information in Tree:" << endl;
-				// cout << myBST << endl;
+				cout << myBST << endl;
 				break;
 			}
 			case 'A': {
