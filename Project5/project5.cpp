@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-
+int displayIndex;
 ////////////////////////////////////////////////////////////////////////////////////////
 // Class ArrayBTNode
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -393,7 +393,7 @@ void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 	
 	int index = _rootIndex;
 	if (isEmpty()) return;
-	os << _tree[index].getinfo() << " ";
+	os << *_tree[index].getinfo() << " ";
 	while (true) {
 		if (*_tree[index].getinfo() == *_tree[index + 1].getinfo()) {
 			break;
@@ -417,7 +417,7 @@ void ArrayBST<DT>::displayInOrder(ostream& os) const {
 	if (isEmpty()) return;
 	while (true) {
 		if (*_tree[index].getinfo() == *_tree[index + 1].getinfo()) {
-			os << _tree[index].getinfo() << " ";
+			os << *_tree[index].getinfo() << " ";
 			break;
 		}
 		else if (*_tree[index].getinfo() < *_tree[index + 1].getinfo()) {
