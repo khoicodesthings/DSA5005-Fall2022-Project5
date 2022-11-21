@@ -15,11 +15,7 @@ template <class DT>
 class ArrayBTNode
 {
 	template <class DT>
-	friend ostream& operator<< (ostream& s, ArrayBTNode<DT>& node) {
-		//s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
-		node.display();
-		return s;
-	}
+	friend ostream& operator<< (ostream& s, ArrayBTNode<DT>& node);
 protected:
 	// Instance Variables
 	DT* _info;
@@ -156,7 +152,12 @@ bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
 	return *_info != *x._info;
 }
 
-
+template <class DT>
+ostream& operator<< (ostream& s, ArrayBTNode<DT>& node) {
+	//s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
+	node.display();
+	return s;
+}
 
 template <class DT>
 void ArrayBTNode<DT>::display() {
@@ -173,12 +174,7 @@ template <class DT>
 class ArrayBST
 {
 	template <class DT>
-	friend ostream& operator<< (ostream& s, ArrayBST<DT>& tree) {
-		// will call display here
-		// in main, simply use cout << myBST
-		tree.display(s);
-		return s;
-	}
+	friend ostream& operator<< (ostream& s, ArrayBST<DT>& tree);
 protected:
 	// Instance Variables
 	vector<ArrayBTNode<DT> > _tree;    // Vector of ArrayBTNodes used to create a tree
@@ -420,6 +416,14 @@ template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) {
 	// left tree, root, right tree
 	_InOrder(_rootIndex);
+}
+
+template <class DT>
+ostream& operator<< (ostream& s, ArrayBST<DT>& tree) {
+	// will call display here
+	// in main, simply use cout << myBST
+	tree.display(s);
+	return s;
 }
 
 template <class DT>
