@@ -407,26 +407,12 @@ void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 			displayPreOrder(os);
 		}
 	}
-	/*for (size_t i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
-		_tree[i].getleft().displayPreOrder(os);
-		_tree[i].getright().displayPreOrder(os);
-	}*/
-	
 }
 
 template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) const {
 	// left tree, root, right tree
 	os << "In Order Traversal" << endl;
-	/*if (isEmpty()) return;
-	for (int i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
-		_tree[i].getleft().displayPreOrder(os);
-		_tree[i].getright().displayPreOrder(os);
-	}
-	os << _tree[rootIndex()].getinfo() << " ";
-	for (int i = _freeLocations.top() + 1; i <= rootIndex(); i++) {
-		_tree[i].getright().displayPreOrder(os);
-	}*/
 	int index = _rootIndex;
 	if (isEmpty()) return;
 	while (true) {
