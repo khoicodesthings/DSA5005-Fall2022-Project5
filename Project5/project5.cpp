@@ -172,7 +172,13 @@ void ArrayBTNode<DT>::display() {
 template <class DT>
 class ArrayBST
 {
-	friend ostream& operator<< (ostream& s, const ArrayBST<DT>& tree);
+	template <class DT>
+	friend ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
+		// will call display here
+		// in main, simply use cout << myBST
+		tree.display(s);
+		return s;
+	}
 protected:
 	// Instance Variables
 	vector<ArrayBTNode<DT> > _tree;    // Vector of ArrayBTNodes used to create a tree
@@ -370,13 +376,6 @@ int ArrayBST<DT>::findIndex(DT& object) {
 
 // display methods
 
-template <class DT>
-ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
-	// will call display here
-	// in main, simply use cout << myBST
-	tree.display(s);
-	return s;
-}
 
 template <class DT>
 void ArrayBST<DT>::display(ostream& os) const {
