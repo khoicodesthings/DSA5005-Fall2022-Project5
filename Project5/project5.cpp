@@ -44,12 +44,12 @@ public:
 
 	// Overloaded Comparison Operators
 	// Used for comparing _info field with other ArrayBTNodes
-	bool operator<( ArrayBTNode<DT>& x);
-	bool operator>( ArrayBTNode<DT>& x);
-	bool operator==( ArrayBTNode<DT>& x);
-	bool operator>=( ArrayBTNode<DT>& x);
-	bool operator<=( ArrayBTNode<DT>& x);
-	bool operator!=( ArrayBTNode<DT>& x);
+	bool operator<(const ArrayBTNode<DT>& x);
+	bool operator>(const ArrayBTNode<DT>& x);
+	bool operator==(const ArrayBTNode<DT>& x);
+	bool operator>=(const ArrayBTNode<DT>& x);
+	bool operator<=(const ArrayBTNode<DT>& x);
+	bool operator!=(const ArrayBTNode<DT>& x);
 
 	// TODO: Overloaded Ostream Operator - Uses display method to output ArrayBTNode contents
 };
@@ -122,33 +122,33 @@ ArrayBTNode<DT>::~ArrayBTNode() {
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator< ( ArrayBTNode<DT>& x) {
-	return *_info < *x.getinfo();
+bool ArrayBTNode<DT>:: operator< (const ArrayBTNode<DT>& x) {
+	return *_info < *x._info;
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator> ( ArrayBTNode<DT>& x) {
-	return *_info > *x.getinfo();
+bool ArrayBTNode<DT>:: operator> (const ArrayBTNode<DT>& x) {
+	return *_info > *x._info;
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator== ( ArrayBTNode<DT>& x) {
-	return *_info == *x.getinfo();
+bool ArrayBTNode<DT>:: operator== (const ArrayBTNode<DT>& x) {
+	return *_info == *x._info;
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator<= ( ArrayBTNode<DT>& x) {
-	return *_info <= *x.getinfo();
+bool ArrayBTNode<DT>:: operator<= (const ArrayBTNode<DT>& x) {
+	return *_info <= *x._info;
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator>= ( ArrayBTNode<DT>& x) {
-	return *_info >= *x.getinfo();
+bool ArrayBTNode<DT>:: operator>= (const ArrayBTNode<DT>& x) {
+	return *_info >= *x._info;
 }
 
 template <class DT>
-bool ArrayBTNode<DT>:: operator!= ( ArrayBTNode<DT>& x) {
-	return *_info != *x.getinfo();
+bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
+	return *_info != *x._info;
 }
 
 template <class DT>
@@ -374,21 +374,23 @@ template <class DT>
 ostream& operator<< (ostream& s, const ArrayBST<DT>& tree) {
 	// will call display here
 	// in main, simply use cout << myBST
-	tree.display();
+	tree.display(s);
 	return s;
 }
 
 template <class DT>
 void ArrayBST<DT>::display(ostream& os) const {
 	// will call displayPreOrder and displayInOrder
-	displayPreOrder();
-	displayInOrder();
+	os << "Pre Order Traversal" << endl;
+	displayPreOrder(os);
+	os << "In Order Traversal" << endl;
+	displayInOrder(os);
 }
 
 template <class DT>
 void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 	// root, left tree, right tree
-	os << "Pre Order Traversal" << endl;
+	
 	int index = _rootIndex;
 	if (isEmpty()) return;
 	os << _tree[index].getinfo() << " ";
