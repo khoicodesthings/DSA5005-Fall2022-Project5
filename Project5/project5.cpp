@@ -402,23 +402,6 @@ void ArrayBST<DT>::_PreOrder(int pos) {
 template <class DT>
 void ArrayBST<DT>::displayPreOrder(ostream& os) {
 	// root, left tree, right tree
-	// displayIndex got initialized to rootIndex in main
-	//if (isEmpty()) return;
-	//os << *_tree[displayIndex].getinfo() << " ";
-	//while (true) {
-	//	if ((_tree[displayIndex]).getright() == -1 && (_tree[displayIndex]).getleft() == -1) {
-	//		//os << *_tree[displayIndex].getinfo() << " ";
-	//		break;
-	//	}
-	//	if ((_tree[displayIndex]).getright() != -1) {
-	//		displayIndex = _tree[displayIndex].getright();
-	//		displayPreOrder(os);
-	//	}
-	//	if ((_tree[displayIndex]).getleft() != -1) {
-	//		displayIndex = _tree[displayIndex].getleft();
-	//		displayPreOrder(os);
-	//	}
-	//}
 	_PreOrder(_rootIndex);
 }
 
@@ -436,21 +419,6 @@ void ArrayBST<DT>::_InOrder(int pos) {
 template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) {
 	// left tree, root, right tree
-	/*if (isEmpty()) return;
-	while (true) {
-		if ((_tree[displayIndex]).getright() == -1 && (_tree[displayIndex]).getleft() == -1) {
-			os << *_tree[displayIndex].getinfo() << " ";
-			break;
-		}
-		else if ((_tree[displayIndex]).getright() != -1) {
-			displayIndex = _tree[displayIndex].getright();
-			displayInOrder(os);
-		}
-		else {
-			displayIndex = _tree[displayIndex].getleft();
-			displayInOrder(os);
-		}
-	}*/
 	_InOrder(_rootIndex);
 }
 
