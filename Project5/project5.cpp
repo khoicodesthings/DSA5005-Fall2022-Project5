@@ -206,9 +206,9 @@ public:
 	void setRight(int index, int value);
 
 	// Display methods and traversals
-	void display(ostream& os) const;
-	void displayPreOrder(ostream& os) const;
-	void displayInOrder(ostream& os) const;
+	void display(ostream& os);
+	void displayPreOrder(ostream& os);
+	void displayInOrder(ostream& os);
 	void printRaw(); // Display the array and all of its contents
 
 	// BST Specific Methods
@@ -217,7 +217,7 @@ public:
 	bool _find(DT& object, int pos);
 	int findIndex(DT& object);
 	//void remove(DT& object); // extra credit
-
+	
 	// TODO: Overridden ostream operator for ArrayBST - this will call the pre order and in order methods
 };
 
@@ -378,25 +378,27 @@ int ArrayBST<DT>::findIndex(DT& object) {
 
 
 template <class DT>
-void ArrayBST<DT>::display(ostream& os) const {
+void ArrayBST<DT>::display(ostream& os) {
 	// will call displayPreOrder and displayInOrder
 	os << "Pre Order Traversal" << endl;
 	displayPreOrder(os);
+	os << endl;
 	os << "In Order Traversal" << endl;
 	displayInOrder(os);
 }
 
 template <class DT>
-void ArrayBST<DT>::displayPreOrder(ostream& os) const {
+void ArrayBST<DT>::displayPreOrder(ostream& os) {
 	// root, left tree, right tree
-	
+	// displayIndex got initialized to rootIndex in main
 	if (isEmpty()) return;
 	os << *_tree[displayIndex].getinfo() << " ";
 	while (true) {
-		if (*_tree[displayIndex].getinfo() == *_tree[displayIndex + 1].getinfo()) {
+		if ((_tree[displayIndex]).getright() == -1 && (_tree[displayIndex]).getleft() == -1) {
+			//os << *_tree[displayIndex].getinfo() << " ";
 			break;
 		}
-		else if (*_tree[displayIndex].getinfo() < *_tree[displayIndex + 1].getinfo()) {
+		if ((_tree[displayIndex]).getright() != -1) {
 			displayIndex = _tree[displayIndex].getright();
 			displayPreOrder(os);
 		}
@@ -408,21 +410,21 @@ void ArrayBST<DT>::displayPreOrder(ostream& os) const {
 }
 
 template <class DT>
-void ArrayBST<DT>::displayInOrder(ostream& os) const {
+void ArrayBST<DT>::displayInOrder(ostream& os) {
 	// left tree, root, right tree
 	if (isEmpty()) return;
 	while (true) {
-		if (*_tree[displayIndex].getinfo() == *_tree[displayIndex + 1].getinfo()) {
+		if ((_tree[displayIndex]).getright() == -1 && (_tree[displayIndex]).getleft() == -1) {
 			os << *_tree[displayIndex].getinfo() << " ";
 			break;
 		}
-		else if (*_tree[displayIndex].getinfo() < *_tree[displayIndex + 1].getinfo()) {
+		else if ((_tree[displayIndex]).getright() != -1) {
 			displayIndex = _tree[displayIndex].getright();
-			displayPreOrder(os);
+			displayInOrder(os);
 		}
 		else {
 			displayIndex = _tree[displayIndex].getleft();
-			displayPreOrder(os);
+			displayInOrder(os);
 		}
 	}
 }
@@ -468,7 +470,7 @@ int main()
 	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
 	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
-
+	displayIndex = myBST.rootIndex();
 	// TODO: input loop for commands
 	char command;
 	cin >> command;
