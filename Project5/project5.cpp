@@ -437,16 +437,16 @@ void ArrayBST<DT>::printRaw() {
 		}
 	}
 	cout << "Free Indexes: " << endl;
+	if (_freeLocations.empty() == true) {
+		cout << "None";
+		return;
+	}
 	stack<int> newStack = _freeLocations;
 	while (!newStack.empty() && newStack.top() != 0) {
 		cout << newStack.top() << ", ";
 		newStack.pop();
 	}
-	if (_freeLocations.empty() == true) {
-		cout << "None";
-		return;
-	}
-	cout << "0";
+	cout << newStack.top();
 }
 
 template <class DT>
