@@ -263,11 +263,11 @@ template <class DT>
 int ArrayBST<DT>::_height(int pos) {
 	// left traversal
 	if (_tree[pos].getleft() != -1) {
-		leftheight = _height(_tree[pos].getleft());
+		leftheight = leftheight + _height(_tree[pos].getleft());
 	}
 	// right traversal
 	if (_tree[pos].getright() != -1) {
-		rightheight = _height(_tree[pos].getleft());
+		rightheight = rightheight + _height(_tree[pos].getleft());
 	}
 	return max(leftheight, rightheight) + 1;
 }
