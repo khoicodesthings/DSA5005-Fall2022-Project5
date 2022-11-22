@@ -6,7 +6,8 @@
 #include <vector>
 
 using namespace std;
-int displayIndex;
+int leftheight = 0;
+int rightheight = 0;
 ////////////////////////////////////////////////////////////////////////////////////////
 // Class ArrayBTNode
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -157,13 +158,6 @@ bool ArrayBTNode<DT>:: operator!= (const ArrayBTNode<DT>& x) {
 	return *_info != *x._info;
 }
 
-//template <class DT>
-//ostream& operator<< (ostream& s, ArrayBTNode<DT>& node) {
-//	//s << "Info: " << node->_info << ", Left: " << node.getleft() << ", Right: " << node.getright() << endl;
-//	node.display();
-//	return s;
-//}
-
 template <class DT>
 void ArrayBTNode<DT>::display() {
 	cout << "Info: " << *getinfo() << ", Left: " << getleft() << ", Right: " << getright() << endl;
@@ -196,6 +190,7 @@ public:
 
 	// Accessor Methods
 	bool isEmpty();
+	int _height(int pos);
 	int Height();
 	int Size();
 	int rootIndex();
@@ -263,10 +258,24 @@ bool ArrayBST<DT>::isEmpty() {
 	return _tree.empty();
 }
 
+// helper method for Height()
+template <class DT>
+int ArrayBST<DT>::_height(int pos) {
+	// left traversal
+	if (_tree[pos].getleft() != -1) {
+		leftheight = _height(_tree[pos].getleft());
+	}
+	// right traversal
+	if (_tree[pos].getright() != -1) {
+		rightheight = _height(_tree[pos].getleft());
+	}
+	return max(leftheight, rightheight) + 1;
+}
+
 template <class DT>
 int ArrayBST<DT>::Height() {
 	// root to the furthest leaf
-	return _numNodes; // not correct
+	return _height(_rootIndex); // not correct
 }
 
 template <class DT>
@@ -283,8 +292,6 @@ template <class DT>
 int ArrayBST<DT>::rootIndex() {
 	return _rootIndex;
 }
-
-
 
 // mutators
 template <class DT>
@@ -367,15 +374,20 @@ bool ArrayBST<DT>::_find(DT& object, int pos) {
 
 template <class DT>
 int ArrayBST<DT>::findIndex(DT& object) {
+	// index to keep the position in the BST
 	int index = _rootIndex;
+	// boolean flag for the while loop
 	bool found = false;
 	while (found == false) {
+		// found case
 		if (*_tree[index].getinfo() == object) {
 			found = true;
 		}
+		// go right and update index
 		else if (*_tree[index].getinfo() < object) {
 			index = _tree[index].getright();
 		}
+		// go left and update index
 		else {
 			index = _tree[index].getleft();
 		}
@@ -430,39 +442,40 @@ void ArrayBST<DT>::displayInOrder(ostream& os) {
 	_InOrder(_rootIndex);
 }
 
-//template <class DT>
-//ostream& operator<< (ostream& s, ArrayBST<DT>& tree) {
-//	// will call display here
-//	// in main, simply use cout << myBST
-//	tree.display(s);
-//	return s;
-//}
-
 template <class DT>
 void ArrayBST<DT>::printRaw() {
+	// print out the _tree vector
 	cout << "Raw Data: " << endl;
 	for (int i = 0; i < _size; i++) {
 		if (_tree[i].getinfo() != NULL) {
 			cout << "Index " << i << ": ";
-			// _tree[i].display();
 			cout << _tree[i];
 		}
 	}
+	// print out the stack
 	cout << "Free Indexes: " << endl;
+	// first check if stack is empty
 	if (_freeLocations.empty() == true) {
 		cout << "None";
 		return;
 	}
+	// use a temp stack so that 
+	// when pop() is called
+	// it does not affect the _freeLocations stack
 	stack<int> newStack = _freeLocations;
+	// print until 1 with comma
 	while (!newStack.empty() && newStack.top() != 0) {
 		cout << newStack.top() << ", ";
 		newStack.pop();
 	}
+	// print out 0
 	cout << newStack.top();
 }
 
 template <class DT>
 ArrayBST<DT>::~ArrayBST() {
+	// reset all int parameters to -1
+	// don't need to deallocate memory for vector and stack
 	_rootIndex = -1;
 	_numNodes = -1;
 	_size = -1;
@@ -481,7 +494,6 @@ int main()
 	cout << "Number of maximum nodes: " << inputSize << endl;
 	// Create a BST of the size inputSize
 	ArrayBST<int> myBST = ArrayBST<int>(inputSize);
-	displayIndex = myBST.rootIndex();
 	// TODO: input loop for commands
 	char command;
 	cin >> command;
@@ -498,8 +510,6 @@ int main()
 			case 'O': {
 				cout << "Information in Tree:" << endl;
 				cout << myBST << endl;
-				// reset global index
-				displayIndex = myBST.rootIndex();
 				break;
 			}
 			case 'A': {
