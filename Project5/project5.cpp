@@ -377,10 +377,10 @@ int ArrayBST<DT>::findIndex(DT& object) {
 template <class DT>
 void ArrayBST<DT>::display(ostream& os) {
 	// will call displayPreOrder and displayInOrder
-	os << "Pre Order Traversal" << endl;
+	os << "Pre Order Traversal:" << endl;
 	displayPreOrder(os);
 	os << endl;
-	os << "In Order Traversal" << endl;
+	os << "In Order Traversal:" << endl;
 	displayInOrder(os);
 }
 
@@ -438,13 +438,15 @@ void ArrayBST<DT>::printRaw() {
 	}
 	cout << "Free Indexes: " << endl;
 	stack<int> newStack = _freeLocations;
-	while (!newStack.empty()) {
-		cout << newStack.top() << " ";
+	while (!newStack.empty() && newStack.top() != 0) {
+		cout << newStack.top() << ", ";
 		newStack.pop();
 	}
 	if (_freeLocations.empty() == true) {
 		cout << "None";
+		return;
 	}
+	cout << "0";
 }
 
 template <class DT>
