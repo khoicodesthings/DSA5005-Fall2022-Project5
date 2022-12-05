@@ -205,8 +205,10 @@ public:
 	void display(ostream& os);
 	void displayPreOrder(ostream& os);
 	void displayInOrder(ostream& os);
+	void displayPostOrder(ostream& os);
 	void _PreOrder(int post);
 	void _InOrder(int pos);
+	void _PostOrder(int pos);
 	void printRaw(); // Display the array and all of its contents
 
 	// BST Specific Methods
@@ -406,6 +408,9 @@ void ArrayBST<DT>::display(ostream& os) {
 	os << endl;
 	os << "In Order Traversal:" << endl;
 	displayInOrder(os);
+	os << endl;
+	os << "Post Order Traversal:" << endl;
+	displayPostOrder(os);
 }
 
 template<class DT>
@@ -440,6 +445,23 @@ template <class DT>
 void ArrayBST<DT>::displayInOrder(ostream& os) {
 	// left tree, root, right tree
 	_InOrder(_rootIndex);
+}
+
+template <class DT>
+void ArrayBST<DT>::_PostOrder(int pos) {
+	if (_tree[pos].getleft() != -1) {
+		_PostOrder(_tree[pos].getleft());
+	}
+	if (_tree[pos].getright() != -1) {
+		_PostOrder(_tree[pos].getright());
+	}
+	cout << *_tree[pos].getinfo() << " ";
+}
+
+template <class DT>
+void ArrayBST<DT>::displayPostOrder(ostream& os) {
+	// left tree, root, right tree
+	_PostOrder(_rootIndex);
 }
 
 template <class DT>
